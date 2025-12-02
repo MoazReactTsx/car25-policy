@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car25 - سياسة الخصوصية وحذف الحساب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: #0f0f0f;
+      color: #eaeaea;
+      margin: 0;
+      padding: 0;
+      line-height: 1.7;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      background: #1a1a1a;
+      border-bottom: 1px solid #333;
+    }
+    .brand {
+      font-weight: 700;
+      font-size: 22px;
+      color: #00b8d9;
+    }
+    .section {
+      margin: 20px;
+      padding: 20px;
+      background: #1f1f1f;
+      border-radius: 12px;
+    }
+    button {
+      background: #00b8d9;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.8; }
+    ul { margin-left: 20px; }
+    a { color: #00b8d9; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 class="brand" id="brandName">Car25</h2>
+    <button id="langBtn"></button>
+  </header>
+  <div id="content"></div>
+
+  <script>
+    const query = new URLSearchParams(window.location.search);
+    const mode = query.get("mode") || "privacy";
+    const langQuery = query.get("lang");
+    const supportedLanguages = ["en", "ar"];
+    const lang = supportedLanguages.includes(langQuery) ? langQuery : "ar";
+
+    const contentDiv = document.getElementById("content");
+    const langBtn = document.getElementById("langBtn");
+
+    const texts = {
+      privacy: {
+        ar: `
+          <div class="section">
+            <h1>سياسة الخصوصية</h1>
+            <p>مرحبًا بك في <strong>Car25</strong>! نحن نهتم بحماية خصوصيتك ونضمن الحفاظ على بياناتك أثناء استخدامك لتطبيقنا سواء لبيع وشراء السيارات أو لعرض وشراء قطع الغيار والمنتجات.</p>
+          </div>
+
+          <div class="section">
+            <h2>البيانات التي نجمعها</h2>
+            <ul>
+              <li>الاسم، رقم الهاتف، البريد الإلكتروني</li>
+              <li>معلومات الحساب وتفضيلات المستخدم</li>
+              <li>بيانات عمليات الشراء، السلة، وطلبات البيع</li>
+              <li>الموقع الجغرافي لتحسين تجربة البحث والعروض القريبة منك</li>
+              <li>معلومات الجهاز وملفات تقنيات التتبع لتحسين الأداء</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>كيف نستخدم بياناتك</h2>
+            <ul>
+              <li>لتمكينك من عرض وشراء السيارات وقطع الغيار والمنتجات</li>
+              <li>لتحسين تجربة المستخدم داخل التطبيق</li>
+              <li>لتقديم محتوى وتوصيات مناسبة لك</li>
+              <li>للتواصل معك بخصوص الحساب أو الطلبات أو المشكلات التقنية</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>أمان البيانات</h2>
+            <p>نتخذ جميع التدابير التقنية والتنظيمية لحماية بياناتك من الوصول غير المصرح به أو التعديل أو الحذف.</p>
+          </div>
+
+          <div class="section">
+            <h2>تواصل معنا</h2>
+            <p>لأي استفسار أو طلب دعم، يمكنك التواصل معنا عبر البريد الإلكتروني:
+              <a href="mailto:mh.data2020@gmail.com">mh.data2020@gmail.com</a>
+            </p>
+          </div>
+        `,
+
+        en: `
+          <div class="section">
+            <h1>Privacy Policy</h1>
+            <p>Welcome to <strong>Car25</strong>! We are committed to protecting your privacy and keeping your information secure while using our platform for buying and selling cars, spare parts, and automotive products.</p>
+          </div>
+
+          <div class="section">
+            <h2>Information We Collect</h2>
+            <ul>
+              <li>Name, phone number, email</li>
+              <li>User account preferences and settings</li>
+              <li>Purchase history, cart data, and selling requests</li>
+              <li>Location data to improve search results and nearby offers</li>
+              <li>Device information & tracking technology for performance improvements</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>How We Use Your Data</h2>
+            <ul>
+              <li>To enable car listing, purchasing, and browsing automotive products</li>
+              <li>To improve user experience and application performance</li>
+              <li>To provide personalized recommendations and content</li>
+              <li>To contact you regarding account, orders, or support issues</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>Data Protection</h2>
+            <p>We apply strong security measures to protect your personal data from unauthorized access or misuse.</p>
+          </div>
+
+          <div class="section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feel free to contact us at
+              <a href="mailto:mh.data2020@gmail.com">mh.data2020@gmail.com</a>
+            </p>
+          </div>
+        `
+      },
+
+      delete: {
+        ar: `
+          <div class="section">
+            <h1>حذف الحساب</h1>
+            <p>لحذف حسابك في <strong>Car25</strong>، يرجى اتباع الخطوات التالية:</p>
+            <ul>
+              <li>افتح التطبيق وانتقل إلى "إعدادات الحساب".</li>
+              <li>اختر <strong>حذف الحساب</strong>.</li>
+              <li>سيتم حذف بياناتك نهائيًا خلال <strong>30 يومًا</strong> من تاريخ الطلب.</li>
+            </ul>
+            <p>في حال وجود أي مشكلة، يمكنك التواصل معنا عبر البريد:
+              <a href="mailto:mh.data2020@gmail.com">mh.data2020@gmail.com</a>
+            </p>
+          </div>
+        `,
+
+        en: `
+          <div class="section">
+            <h1>Delete Account</h1>
+            <p>To delete your <strong>Car25</strong> account:</p>
+            <ul>
+              <li>Open the app and go to "Account Settings".</li>
+              <li>Select <strong>Delete Account</strong>.</li>
+              <li>Your data will be permanently removed within <strong>30 days</strong>.</li>
+            </ul>
+            <p>If you experience any issues, contact us at
+              <a href="mailto:mh.data2020@gmail.com">mh.data2020@gmail.com</a>
+            </p>
+          </div>
+        `
+      }
+    };
+
+    function render(language) {
+      const selectedText = texts[mode]?.[language] || texts["privacy"].ar;
+      contentDiv.innerHTML = selectedText;
+      langBtn.textContent = language === "en" ? "العربية" : "English";
+      document.body.dir = language === "ar" ? "rtl" : "ltr";
+    }
+
+    langBtn.addEventListener("click", () => {
+      const newLang = lang === "en" ? "ar" : "en";
+      window.location.search = `?mode=${mode}&lang=${newLang}`;
+    });
+
+    render(lang);
+  </script>
+</body>
+</html>
